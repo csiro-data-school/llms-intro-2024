@@ -16,8 +16,7 @@ keypoints:
 
 ## Relational Databases
 
-Relational Databases are collections of tabular data that relate to one another. The have been important
-in Information Technology for many years and form fundamental parts of Business data management. Relational 
+Relational Databases are collections of tabular data that relate to one another. Relational
 Databases are often manipulated and queried through a language called SQL or structured query language. In science
 there are many specialized databases and database like systems providing powerful capabilities to access and understand
 large datasets.
@@ -88,11 +87,11 @@ efficiently store and query large volumes of data. Such database systems are qui
 scenes of many websites you may interact with, e.g. Facebook, especially if the website provides
 any searchable or sortable data.
   
-Some of the most popular database systems include MySQL, SQL Server, Oracle and PostgreSQL. These systems
+Some of the most popular database systems include PostgreSQL, various hosted Cloud offerings, MySQL, SQL Server, Oracle. These systems
 (and others) have settled on a common (mostly consistent) language and syntax for interacting 
 with them, for defining tables and relationships, for inserting/altering data and for making 
 queries. This language is called SQL - Structured Query Language.
   
 SQL is what we'll be learning through this tutorial. 
   
-To introduce SQL, we'll be making use of a lightweight, portable SQL database system, 'SQLite'.
+To introduce SQL, we'll be making use of a lightweight, portable SQL database system, 'SQLite' and another similar system called 'duckdb'. SQLite and duckdb are also great for integration directly into python and for working with scientific and geospatial data.

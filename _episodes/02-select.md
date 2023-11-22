@@ -216,7 +216,52 @@ we'll return to these missing values [later]({{ site.github.url }}/05-null/).
 > To exit SQLite and return to the shell command line,
 > you can use either `.quit` or `.exit`.
 {: .callout}
-  
+
+## Using DuckDB
+
+DuckDB is introduced here because it is simple, modern, emerging, very powerful and spatially enabled.
+
+First we need to enable some extensions. A spatial extension and an sqlite extension.
+
+~~~
+import duckdb
+duckdb.sql('INSTALL spatial; LOAD spatial;')
+duckdb.sql('INSTALL sqlite; LOAD sqlite;') 
+~~~
+ {: .py}
+
+Now when we want to execute an sqlite query we can do this directly in python like
+
+~~~
+import duckdb
+duckdb.sql("SELECT family, personal FROM sqlite_scan('survey.db', 'Person')")
+~~~
+{: .py}
+
+or attach the sqllite database into a "schema" (namespace)  called survey 
+~~~
+import duckdb
+duckdb.sql("ATTACH 'survey.db' AS survey (TYPE sqlite);")
+~~~
+{: .py}
+
+then set the default schema to be survey 
+
+~~~
+duckdb.sql("SET SCHEMA 'survey';")
+~~~
+{: .py}
+
+and then query it like
+
+~~~
+res = duckdb.sql("SELECT * FROM Person;")
+~~~
+{: .py}
+
+
+
+
 ## Selecting (querying) data
 
 For now,
@@ -341,9 +386,11 @@ SELECT * FROM Person;
 
 > ## Understanding CREATE statements
 > 
-> Use the `.schema` to identify column that contains integers.
+> Use the `.schema` in sqlite to identify column that contains integers.
+> or in duckdb use the `duckdb.sql("SELECT * FROM sqlite_master WHERE type='table';")` to identify tables and then `duckdb.sql("PRAGMA table_info(survey.[table name]);`") to describe the table and identify columns that contain integers 
 >
 > > ## Solution
+> >  For sqlite 
 > >
 > > ~~~
 > > .schema
