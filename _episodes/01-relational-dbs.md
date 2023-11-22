@@ -16,6 +16,12 @@ keypoints:
 
 ## Relational Databases
 
+Relational Databases are collections of tabular data that relate to one another. The have been important
+in Information Technology for many years and form fundamental parts of Business data management. Relational 
+Databases are often manipulated and queried through a language called SQL or structured query language. In science
+there are many specialized databases and database like systems providing powerful capabilities to access and understand
+large datasets.
+
 Lets start with a simple example, say, keeping a record of appointments for a medical clinic.  
 You want to record when and where the appointments were, details about patients, their name, 
 address, phone number, etc., and details about the doctors being seen.
