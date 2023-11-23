@@ -1,269 +1,160 @@
 ---
-title: Data Science Programming with Python
+title: LLMs for SQL
 teaching: 10
 exercises: 10
 questions:
-- "How can I peform analytics on databases via Python?"
+- "How can I use LLMs to help with databases and SQL?"
 objectives:
-- "Write a program that executes an SQL queries and plots the result."
-- "Use pandas to interact with a database"
-- "Run a custom python function in a database"
+- "Learn to use LLMs flexibly not just for one kind of task"
+- "Understand the pitfalls of LLMs"
 
-- "Explain why most database applications are written in a general-purpose language rather than in SQL."
 keypoints:
-- "Data analysis languages have libraries for accessing databases."
-- "To connect to a database, a program must use a library specific to that database manager."
-- "R's libraries can be used to directly query or read from a database."
-- "Programs can read query results in batches or all at once."
-- "Queries should be written using parameter substitution, not string formatting."
-- "R has multiple helper functions to make working with databases easier."
+- "LLMs can be used for tasks including tutoring, debugging, writing code, fixing errors, and search"
+- "LLMs can generate incorrect or unexpected responses"
+- "Testing is essential and this too can be in collaboration with an LLM"
 ---
+## LLMs 
 
-To close,
-let's have a look at how to access a database from
-a data analysis language like R.
-Other languages use almost exactly the same model:
-library and function names may differ,
-but the concepts are the same.
+Large Language Models or LLMs are a class of AI that are powerful general purpose tools. The best known
+LLM is ChatGPT but there are many closed and open source LLMs in use and development.
 
-Here's a short R program that selects latitudes and longitudes
-from an SQLite database stored in a file called `survey.db`:
+LLMs can be engaged with through natural language chat, in many ways they are like talking to an expert
+human but have the advantages of being tireless, deeply knowleagble and fast. LLMs can also be wrong while
+convincingly appearing to be right.
+
+As people become familiar with LLMs there is a perception that LLMs are useful for only one or two tasks.
+Actually LLMs are very flexible. Here we will learn how to use LLMs to assist us with working with Data
+through Databases, SQL and related tools.
+
+## LLMs for Understanding
+
+LLMs should support learning not replace it at least not completely. We can use LLMs to help us understand and
+work with databases. 
+
+For example the process of ensuring data in a database isn't duplicated and is distributed across interlinked tables is called normalization. Lets ask the LLM about it
+~~~
+What does database normalization mean?
+~~~
+{: .txt}
+
+The LLM may respond with a comprehensive description of Normal Forms. That might be too much to begin with so lets rephrase
 
 ~~~
-library(RSQLite)
-connection <- dbConnect(SQLite(), "survey.db")
-results <- dbGetQuery(connection, "SELECT Site.lat, Site.long FROM Site;")
-print(results)
-dbDisconnect(connection)
+Very simply what is database normalization?
 ~~~
-{: .r}
-~~~
-     lat    long
-1 -49.85 -128.57
-2 -47.15 -126.72
-3 -48.87 -123.40
-~~~
-{: .output}
+{: .txt}
 
-The program starts by importing the `RSQLite` library.
-If we were connecting to MySQL, DB2, or some other database,
-we would import a different library,
-but all of them provide the same functions,
-so that the rest of our program does not have to change
-(at least, not much)
-if we switch from one database to another.
+This should provide a better response. 
 
-Line 2 establishes a connection to the database.
-Since we're using SQLite,
-all we need to specify is the name of the database file.
-Other systems may require us to provide a username and password as well.
+Returning to the first response we may not understand what is meant by the LLM description of  second nomral form 
 
-On line 3, we retrieve the results from an SQL query.
-It's our job to make sure that SQL is properly formatted;
-if it isn't,
-or if something goes wrong when it is being executed,
-the database will report an error.
-This result is a dataframe with one row for each entry and one column for each column in the database.
+> Second Normal Form (2NF): This builds on the first normal form by ensuring that all non-key attributes are fully functionally dependent on the primary key.
 
-Finally, the last line closes our connection,
-since the database can only keep a limited number of these open at one time.
-Since establishing a connection takes time,
-though,
-we shouldn't open a connection,
-do one operation,
-then close the connection,
-only to reopen it a few microseconds later to do another operation.
-Instead,
-it's normal to create one connection that stays open for the lifetime of the program.
-
-Queries in real applications will often depend on values provided by users.
-For example,
-this function takes a user's ID as a parameter and returns their name:
 
 ~~~
-library(RSQLite)
-
-connection <- dbConnect(SQLite(), "survey.db")
-
-getName <- function(personID) {
-  query <- paste0("SELECT personal || ' ' || family FROM Person WHERE id =='",
-                  personID, "';")
-  return(dbGetQuery(connection, query))
-}
-
-print(paste("full name for dyer:", getName('dyer')))
-
-dbDisconnect(connection)
+For database second normal form what are some examples of when attributes meeting the definition of fully functionally dependent on the primary key and some examples where they don't?
 ~~~
-{: .r}
-~~~ 
-full name for dyer: William Dyer
+{: .txt}
+
+The LLM should respond with some examples of database tables that do and do not conform to second normal form and explain why
+
+## LLMs for writing SQL
+
+Returning to survey.db we can directly ask the LLM to build a query to find the total number of 
+surveys person. There are multiple ways to do this but in all cases the LLM needs some understanding of the database structure.
+
+One way to do this is to ask the LLM for a query to get a succinct description of the tables
+
 ~~~
-{: .output}
-
-We use string concatenation on the first line of this function
-to construct a query containing the user ID we have been given.
-This seems simple enough,
-but what happens if someone gives us this string as input?
-
-~~~ 
-dyer'; DROP TABLE Survey; SELECT '
+In duckdb I need a succint description of all the columns and column types across a whole schema write an sql query to do this
 ~~~
-{: .sql}
+{: .txt}
 
-It looks like there's garbage after the user's ID,
-but it is very carefully chosen garbage.
-If we insert this string into our query,
-the result is:
+We may have to modify the result a bit but a query like gives us a good result
 
-~~~ 
-SELECT personal || ' ' || family FROM Person WHERE id='dyer'; DROP TABLE Survey; SELECT '';
 ~~~
-{: .sql}
-
-If we execute this,
-it will erase one of the tables in our database.
-
-This is called an [SQL injection attack]({{ site.github.url }}/reference.html#sql-injection-attack),
-and it has been used to attack thousands of programs over the years.
-In particular,
-many web sites that take data from users insert values directly into queries
-without checking them carefully first.
-A very [relevant XKCD](https://xkcd.com/327/) that explains the 
-dangers of using raw input in queries a little more succinctly:
-
-![relevant XKCD](https://imgs.xkcd.com/comics/exploits_of_a_mom.png) 
-
-Since an unscrupulous parent might try to smuggle commands into our queries in many different ways,
-the safest way to deal with this threat is
-to replace characters like quotes with their escaped equivalents,
-so that we can safely put whatever the user gives us inside a string.
-We can do this by using a [prepared statement]({{ site.github.url }}/reference.html#prepared-statement)
-instead of formatting our statements as strings.
-Here's what our example program looks like if we do this:
-
-~~~ 
-library(RSQLite)
-connection <- dbConnect(SQLite(), "survey.db")
-
-getName <- function(personID) {
-  query <- "SELECT personal || ' ' || family FROM Person WHERE id == ?"
-  return(dbGetPreparedQuery(connection, query, data.frame(personID)))
-}
-
-print(paste("full name for dyer:", getName('dyer')))
-
-dbDisconnect(connection)
+duckdb.sql("""SELECT table_name, column_name, data_type
+FROM temp.information_schema.columns
+ORDER BY table_name, ordinal_position;""").df()
 ~~~
-{: .r}
-~~~ 
-full name for dyer: William Dyer
+{: .py}
+
+Now it's possible to ask the LLM like
+
 ~~~
-{: .output}
+Given the following schema write a query that gets the total number of surveys performed by each person and orders it high to low
 
-The key changes are in the query string and the `dbGetQuery` call (we use dbGetPreparedQuery instead).
-Instead of formatting the query ourselves,
-we put question marks in the query template where we want to insert values.
-When we call `dbGetPreparedQuery`,
-we provide a dataframe
-that contains as many values as there are question marks in the query.
-The library matches values to question marks in order,
-and translates any special characters in the values
-into their escaped equivalents
-so that they are safe to use.
+0 Person id VARCHAR  
+1 Person personal VARCHAR  
+2 Person family VARCHAR  
+3 Site name VARCHAR  
+4 Site lat DOUBLE  
+5 Site long DOUBLE  
+6 Survey taken BIGINT  
+7 Survey person VARCHAR  
+8 Survey quant VARCHAR  
+9 Survey reading DOUBLE  
+10 Visit id BIGINT  
+11 Visit site VARCHAR  
+12 Visit dated VARCHAR  
+~~~
+{: .py}
 
-> ## Filling a Table vs. Printing Values 
+LLMs aren't too fussy about things like spelling and formatting. They may perfom better with careful prompting but are often highly robust to poor spelling, incomplete requests, and bad formatting. In this case the query to the LLM doesn't actually ask for SQL but the LLM guesses this is the most likely meaning. Notice also for this query the LLM also correctly infered the primary / foreign key relationship between survey person and person id
+
+The result was
+
+~~~
+SELECT 
+    p.id, 
+    p.personal, 
+    p.family, 
+    COUNT(s.person) AS total_surveys
+FROM 
+    Person p
+JOIN 
+    Survey s ON p.id = s.person
+GROUP BY 
+    p.id, p.personal, p.family
+ORDER BY 
+    total_surveys DESC;
+~~~
+{: .txt}
+
+In this case we may have sufficient knowledge to know that this is right. However it is possible for the LLM to make mistakes or produce an unexpected but accurate interpretation of the question leading to unexpected behaviour.
+
+## Testing LLM responses
+
+Ascertaining whether an LLM response is fit for purpose is difficult because we use LLMs to supplement and extend our knowledge and thus don't always know what the right answer is.
+
+Some strategies for testing LLM responses
+
+1. Spot test from a collection of results. Iin the survey example above `Anderson Lake` peformed 7 total surveys. This is a small number and by listing the contents of the Survey table we can manually confirm this is right.
+2. Sanity Check results. In the survey example the results range between 7 and 3 surveys. This looks sane there are no negative numbers, the numbers look feasible for the number of surveys a human could perform and there are no outliers. 
+3. Ask a follow up question. We know that the sum of the surveys per person shouldn't exceed the total number of surveys.
+
+> ## Asking follow up questions for QA 
 >
-> Write an R program that creates a new database in a file called
-> `original.db` containing a single table called `Pressure`, with a
-> single field called `reading`, and inserts 100,000 random numbers
-> between 10.0 and 25.0.  How long does it take this program to run?
-> How long does it take to run a program that simply writes those
-> random numbers to a file?
+> Ask the LLM to generate a query that will get the total number of surveys. 
+> > ## Solution
+> >  
+> >
+> >  
+> > Given the following schema write a query that gets the total number of surveys
+> > 
+> > 0 Person id VARCHAR  
+> > 1 Person personal VARCHAR  
+> > 2 Person family VARCHAR  
+> > 3 Site name VARCHAR  
+> > 4 Site lat DOUBLE  
+> > 5 Site long DOUBLE  
+> > 6 Survey taken BIGINT  
+> > 7 Survey person VARCHAR  
+> > 8 Survey quant VARCHAR  
+> > 9 Survey reading DOUBLE  
+> > 10 Visit id BIGINT  
+> > 11 Visit site VARCHAR  
+> > 12 Visit dated VARCHAR  
+> {: .solution}
 {: .challenge}
-
-> ## Filtering in SQL vs. Filtering in R
->
-> Write an R program that creates a new database called
-> `backup.db` with the same structure as `original.db` and copies all
-> the values greater than 20.0 from `original.db` to `backup.db`.
-> Which is faster: filtering values in the query, or reading
-> everything into memory and filtering in R?
-{: .challenge}
-
-## Database helper functions in R
-
-R's database interface packages (like `RSQLite`) all share 
-a common set of helper functions useful for exploring databases and 
-reading/writing entire tables at once.
-
-To view all tables in a database, we can use `dbListTables()`:
-
-~~~ 
-connection <- dbConnect(SQLite(), "survey.db")
-dbListTables(connection)
-~~~
-{: .r}
-~~~
-"Person"  "Site"    "Survey"  "Visit"
-~~~
-{: .output}
-
-
-To view all column names of a table, use `dbListFields()`:
-
-~~~
-dbListFields(connection, "Survey")
-~~~
-{: .r}
-~~~
-"taken"   "person"  "quant"   "reading"
-~~~
-{: .output}
-
-
-To read an entire table as a dataframe, use `dbReadTable()`:
-
-~~~
-dbReadTable(connection, "Person")
-~~~
-{: .r}
-~~~
-        id  personal   family
-1     dyer   William     Dyer
-2       pb     Frank  Pabodie
-3     lake  Anderson     Lake
-4      roe Valentina  Roerich
-5 danforth     Frank Danforth
-~~~
-{: .output}
-
-
-Finally to write an entire table to a database, you can use `dbWriteTable()`. 
-Note that we will always want to use the `row.names = FALSE` argument or R 
-will write the row names as a separate column. 
-In this example we will write R's built-in `iris` dataset as a table in `survey.db`.
-
-~~~
-dbWriteTable(connection, "iris", iris, row.names = FALSE)
-head(dbReadTable(connection, "iris"))
-~~~
-{: .r}
-~~~
-  Sepal.Length Sepal.Width Petal.Length Petal.Width Species
-1          5.1         3.5          1.4         0.2  setosa
-2          4.9         3.0          1.4         0.2  setosa
-3          4.7         3.2          1.3         0.2  setosa
-4          4.6         3.1          1.5         0.2  setosa
-5          5.0         3.6          1.4         0.2  setosa
-6          5.4         3.9          1.7         0.4  setosa
-~~~
-{: .output}
-
-And as always, remember to close the database connection when done!
-
-~~~
-dbDisconnect(connection)
-~~~
-{: .r}
 
