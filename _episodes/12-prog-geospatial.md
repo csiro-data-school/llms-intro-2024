@@ -1,20 +1,20 @@
 ---
-title: Programming with Databases - R
+title: Data Science Programming with Python
 teaching: 30
 exercises: 15
 questions:
-- "How can I access databases from programs written in R?"
+- "How can I peform analytics on databases via Python?"
 objectives:
-- "Write short programs that execute SQL queries."
-- "Trace the execution of a program that contains an SQL query."
-- "Explain why most database applications are written in a general-purpose language rather than in SQL."
+- "Write a program that executes an SQL queries and plots the result."
+- "Use pandas to interact with a database"
+- "Run a custom python function in a database"
+- "Use a database on some timeseries data"
+
 keypoints:
-- "Data analysis languages have libraries for accessing databases."
-- "To connect to a database, a program must use a library specific to that database manager."
-- "R's libraries can be used to directly query or read from a database."
-- "Programs can read query results in batches or all at once."
-- "Queries should be written using parameter substitution, not string formatting."
-- "R has multiple helper functions to make working with databases easier."
+- "Common python libraries can interface with Databases to analyze data"
+- "Pandas is a powerful library for working with tabular data and databases"
+- "Custom functions can execute fast in databases"
+- "Sensor like data can be processed efficiently in databases with time specific functionality"
 ---
 
 To close,
