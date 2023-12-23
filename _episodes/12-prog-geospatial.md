@@ -1,5 +1,5 @@
 ---
-title: Data Science Programming with Python
+title: Geospatial Data Science with Python and Databases
 teaching: 30
 exercises: 15
 questions:

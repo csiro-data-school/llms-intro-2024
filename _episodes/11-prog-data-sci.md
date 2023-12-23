@@ -1,14 +1,14 @@
 ---
-title: Data Science Programming with Python
+title: Data Science Programming with Python and Databases
 teaching: 30
 exercises: 15
 questions:
-- "How can I peform analytics on databases via Python?"
+- "How can I peform analytics with databases via Python?"
 objectives:
 - "Write a program that executes an SQL queries and plots the result."
+- "Use a database on some timeseries data"
 - "Use pandas to interact with a database"
 - "Run a custom python function in a database"
-- "Use a database on some timeseries data"
 
 keypoints:
 - "Common python libraries can interface with Databases to analyze data"
@@ -17,15 +17,18 @@ keypoints:
 - "Sensor like data can be processed efficiently in databases with time specific functionality"
 ---
 
-To close,
-let's have a look at how to access a database from
-a data analysis language like R.
-Other languages use almost exactly the same model:
-library and function names may differ,
-but the concepts are the same.
+## Data Science Capabilities
 
-Here's a short R program that selects latitudes and longitudes
-from an SQLite database stored in a file called `survey.db`:
+SQL and Databases are used to analyze large amounts
+of data. Additionally databases can readily integrate
+with python data science libraries.
+
+For example databases often provide date/time operations that can quickly aggregate very large observational datasets. 
+
+Some database provide geospatial capability or variants: spatialite a variant of sqlite, DuckDB-spatial a plugin for DuckDB, and PostGIS an extension of postgresql. 
+
+
+
 
 ~~~
 library(RSQLite)
