@@ -20,15 +20,15 @@ keypoints:
 ## Data Science Capabilities
 
 SQL and Databases are used to analyze large amounts
-of data. Additionally databases can readily integrate
-with python data science libraries.
+of data.
 
-For example databases often provide date/time operations that can quickly aggregate very large observational datasets. 
+For example databases often provide date/time operations that can quickly aggregate very large observational datasets.
 
-Some database provide geospatial capability or variants: spatialite a variant of sqlite, DuckDB-spatial a plugin for DuckDB, and PostGIS an extension of postgresql. 
+Some database provide geospatial capability or variants: spatialite a variant of sqlite, DuckDB-spatial a plugin for DuckDB, and PostGIS an extension of postgresql.
 
+## Loading a large amounts of data with duckdb
 
-
+For example we can plot some of the datasets.
 
 ~~~
 library(RSQLite)
@@ -97,7 +97,7 @@ print(paste("full name for dyer:", getName('dyer')))
 dbDisconnect(connection)
 ~~~
 {: .r}
-~~~ 
+~~~
 full name for dyer: William Dyer
 ~~~
 {: .output}
@@ -107,7 +107,7 @@ to construct a query containing the user ID we have been given.
 This seems simple enough,
 but what happens if someone gives us this string as input?
 
-~~~ 
+~~~
 dyer'; DROP TABLE Survey; SELECT '
 ~~~
 {: .sql}
@@ -117,7 +117,7 @@ but it is very carefully chosen garbage.
 If we insert this string into our query,
 the result is:
 
-~~~ 
+~~~
 SELECT personal || ' ' || family FROM Person WHERE id='dyer'; DROP TABLE Survey; SELECT '';
 ~~~
 {: .sql}
@@ -130,10 +130,10 @@ and it has been used to attack thousands of programs over the years.
 In particular,
 many web sites that take data from users insert values directly into queries
 without checking them carefully first.
-A very [relevant XKCD](https://xkcd.com/327/) that explains the 
+A very [relevant XKCD](https://xkcd.com/327/) that explains the
 dangers of using raw input in queries a little more succinctly:
 
-![relevant XKCD](https://imgs.xkcd.com/comics/exploits_of_a_mom.png) 
+![relevant XKCD](https://imgs.xkcd.com/comics/exploits_of_a_mom.png)
 
 Since an unscrupulous parent might try to smuggle commands into our queries in many different ways,
 the safest way to deal with this threat is
@@ -143,7 +143,7 @@ We can do this by using a [prepared statement]({{ site.github.url }}/reference.h
 instead of formatting our statements as strings.
 Here's what our example program looks like if we do this:
 
-~~~ 
+~~~
 library(RSQLite)
 connection <- dbConnect(SQLite(), "survey.db")
 
@@ -157,7 +157,7 @@ print(paste("full name for dyer:", getName('dyer')))
 dbDisconnect(connection)
 ~~~
 {: .r}
-~~~ 
+~~~
 full name for dyer: William Dyer
 ~~~
 {: .output}
@@ -173,7 +173,7 @@ and translates any special characters in the values
 into their escaped equivalents
 so that they are safe to use.
 
-> ## Filling a Table vs. Printing Values 
+> ## Filling a Table vs. Printing Values
 >
 > Write an R program that creates a new database in a file called
 > `original.db` containing a single table called `Pressure`, with a
@@ -194,13 +194,13 @@ so that they are safe to use.
 
 ## Database helper functions in R
 
-R's database interface packages (like `RSQLite`) all share 
-a common set of helper functions useful for exploring databases and 
+R's database interface packages (like `RSQLite`) all share
+a common set of helper functions useful for exploring databases and
 reading/writing entire tables at once.
 
 To view all tables in a database, we can use `dbListTables()`:
 
-~~~ 
+~~~
 connection <- dbConnect(SQLite(), "survey.db")
 dbListTables(connection)
 ~~~
@@ -240,9 +240,9 @@ dbReadTable(connection, "Person")
 {: .output}
 
 
-Finally to write an entire table to a database, you can use `dbWriteTable()`. 
-Note that we will always want to use the `row.names = FALSE` argument or R 
-will write the row names as a separate column. 
+Finally to write an entire table to a database, you can use `dbWriteTable()`.
+Note that we will always want to use the `row.names = FALSE` argument or R
+will write the row names as a separate column.
 In this example we will write R's built-in `iris` dataset as a table in `survey.db`.
 
 ~~~
