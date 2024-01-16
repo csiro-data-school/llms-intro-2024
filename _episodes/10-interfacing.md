@@ -163,6 +163,6 @@ lsql.collect()
 
 ## User facing databases
 
-Here wear are mostly using databases to analyze data. Using databases as a data storage backend for a software application is different. In python for this  it is worth looking at SQLAlchemy, ORMs, and Pydantic.
+Here we are mostly using databases to analyze data. Using databases as a data storage backend for a software application is different. In python for this  it is worth looking at SQLAlchemy, ORMs, and Pydantic.
 
 It is also important to santize user input to databases especially in public facing applications. This avoids neafarious users  or bots building special strings that misuse SQL to execute unauthorized commands.
