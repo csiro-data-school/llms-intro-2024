@@ -6,7 +6,7 @@ sql-intro
 =================
 
 An introduction to databases and SQL using Antarctic survey data.
-Please see <https://csiro-data-school.github.io/sql-intro/> for a rendered version of this material,
+Please see <https://csiro-data-school.github.io/sql-intro-2023/> for a rendered version of this material,
 [the lesson template documentation][lesson-example]
 for instructions on formatting, building, and submitting material,
 or run `make` in this directory for a list of helpful commands.
@@ -20,5 +20,6 @@ Original Software Carpentry maintainer(s):
 CSIRO Version Maintainers:
 * Andrew Spriggs
 * Loretta Clancy
+* Ben Leighton
 
 [lesson-example]: https://carpentries.github.io/lesson-example/
