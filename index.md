@@ -3,19 +3,9 @@ layout: lesson
 root: .
 ---
 
-Three common options for storage are
-text files,
-spreadsheets,
-and databases.
-Text files are easiest to create,
-and work well with version control,
-but then we would have to build search and analysis tools ourselves.
-Spreadsheets are good for doing simple analyses,
-but they don't handle large or complex data sets well.
-Databases, however, include powerful tools for search and analysis,
-and can handle large, complex data sets.
-These lessons will show how to use a relational database to explore data,
-using SQL - Structured Query Language.
+LLM and Generative AI are world changing technologies that are already having massive impacts on the efficiency with which we can do Science. 
+
+These lessons introduce LLMs and describe some of the ways they can be used in Science.
 
 > ## Prerequisites
 >
