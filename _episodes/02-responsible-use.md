@@ -43,19 +43,47 @@ In some cases you maybe able to tolerate some error. For example, if you are lea
 
 ### Censoring Data
 
-Generating 
+One strategy for using LLMs with sensitive data is to generate mock data, metadata, or data structure that removes any sensitive aspects of the data. This must be approached careful as, depending on the remaining information content, some data censoring techniques can be reversed. In some cases it maybe safe to provide an LLM with column names and statistical properties of the data in the columns. LLMs can also indirectly assist in censoring data by writing scripts to generate representative datasets. For example you might ask an LLM to "Generate a python script that reads my CSV and replaces the lat and lon of each location in the location field with random lats and lons". In this example it would be still necessary to understand how the suggested script worked and whether it was sufficient to censor your data. In many cases, when direclty using LLMs, you won't want to send all the data to the LLM. Rather you maybe asking the LLM something about querying or processing your data. In that case it maybe sufficient to send the structure, e.g the column names, along with a broad description of data to the LLM.
 
-
+Sensitive data in other circumstances might include things like file paths and you could remove these and substitue them with placeholders.  
 
 ### Working on Adjacent problems
 
+Where there is a risk of exposure of intellectual property or sensitive data it still maybe possible to indirectly work with LLMs. For example you may need to learn and employ a statistical technique on your dataset. It might be possible to learn this technique and work with the LLM to generate code without any specifics of the work you are doing being provided to the LLM. Caution should be taken as over many interactions with an LLM it maybe possible for an adversary to glean information about your IP or data by looking at trends and context.  
+
+> ## Understand terms and conditions 
+>  
+> Find the privacy terms and conditions for OpenAIs ChatGPT 
+> 
+> {: .text}
+{: .challenge}
 
 
+> ## Trick an LLM 
+>  
+>  Try to find a mistake in an LLM by asking a really tricky question at the edge of your domain knowledge?
+> 
+> {: .text}
+{: .challenge}
 
-Exercises:
+> ## Examples of Sensitive Data
+>  
+> Write code using an LLM to generate python code that implements a basic example of conways game of life. Try executing it in the jupyterlab.
+> 
+> {: .text}
+{: .challenge}
 
-1. Find the privacy terms and conditions for OpenAIs ChatGPT
-2. Try to find a mistake in an LLM by asking a really tricky question at the edge of your domain knowledge?
-3. What would be an example of some data from your context you should not send to an LLM?
-4. Can you think of any safe ways of engaging an LLM around your problem when there maybe a sensitive aspect? 
-5. How could you test LLM output in your context?
+
+> ## Safe Interactions
+>
+>  Can you think of any safe ways of engaging an LLM around your problem when there maybe a sensitive aspect?
+> 
+> {: .text}
+{: .challenge}
+
+> ## Testing Results
+>
+> How could you test LLM output in your context?
+> 
+> {: .text}
+{: .challenge}
