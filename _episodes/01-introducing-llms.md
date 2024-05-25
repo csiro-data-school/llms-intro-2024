@@ -28,6 +28,9 @@ LLMs especially those comparable to ChatGPT 4:
 4. Display creativity and can generate some unique ideas
 5. Can analyze large amounts of input text or data
 
+A key in learning how to use LLMs effectively is to experiment. Try different inputs. Think of what tasks an LLM could help you with. See how you go trying to use an LLM for *all* tasks associated with a part of your work. Use an LLM instead of google, is it reliable and useful? Try comic exchanges with an LLM or asking it to produce creative outputs. 
+
+
 ### Examples of interactions with ChatGPT 4
 
 1. Historical knowledge
