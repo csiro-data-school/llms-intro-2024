@@ -31,6 +31,14 @@ In addition to the risks of supplying PII or IP into LLMs you should familiarize
 
 LLMs are trained to be highly reliable and in practice for many use cases they make few mistakes. However there LLMs are more likely to make mistakes on more complex tasks and these mistakes can be subtle. You should work with LLMs assuming there maybe a mistake in what the LLM outputs. Less sophisticated LLMs like ChatGPT version 3.5 are more likely to produce mistakes than better LLMs like ChatGPT 4. LLM developers generally work very hard to reduce mistakes and LLMs are often trained and tested on their ability to produce correct output.
 
+### Disclosure
+
+Many organisations and institutions are grappling with how to treat AI generated content. In some cases AI generated content is outright banned. In other cases AI generated content is acceptable but should be disclosed. In some cases what constitues AI Generated Content is clear. For example asking ChatGPT to generate an essay on "Common household pets" and then copying that content for direct use representing it as your own work would be deceptive and even with attribution in many cases it would not be allowed.
+
+However what constitutes AI generated content is not always clear cut. For example you may use AI as an encyclopedia like resource to extract facts or overviews on topics (It's best to cross check facts from AIs in this case). These facts then might form the basis for your own words in an essay. Similarly AIs can be used at abstract levels to suggest research approaches, to describe suitable structures for documents or to review text and make suggestions or simple corrections. Thus AI authorship is not clear cut and disclosure or avoidance of AI content is not simple. 
+
+As AIs become ubiquitous and predominant tools the societal attitudes to AI generated content will change and may become clearer. 
+
 ### Strategies for mitigating risk
 
 ### Testing
