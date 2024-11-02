@@ -186,3 +186,6 @@ Look for flaws - When specifically instructed LLMs maybe able to find flaws in d
 > 
 > {: .text}
 {: .challenge}
+
+Note
+GPT-4 and o1 preview were used to review material, iteratively generate and refine the diagram and contributed most of the overarching concerns
