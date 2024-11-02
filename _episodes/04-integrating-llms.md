@@ -166,3 +166,23 @@ Look for flaws - When specifically instructed LLMs maybe able to find flaws in d
 
 **Integrate into downstream systems** - Downstream systems might require a different data format an LLM can help write code to transform data for different integrations or maybe able to directly transform small ammounts of data  
 
+> ## Sketch your science workflow 
+>  
+> Sketch out a simple science workflow in your context
+> 
+> {: .text}
+{: .challenge}
+
+> ## Note points where an LLM could be useful
+>  
+> Enhace your diagram by connecting techiques for working with LLMs to appropriate steps in your workflow
+> 
+> {: .text}
+{: .challenge}
+
+> ## Write an example query for a workflow step
+>  
+> For some of the enhancement you've identified write an example query for the LLM and note the response. Is it useful?
+> 
+> {: .text}
+{: .challenge}
