@@ -56,6 +56,8 @@ clear-rmd :
 workshop-check :
 	@bin/workshop_check.py .
 
+preprocess-md:
+    python preprocess_mermaid.py _episodes
 ## ----------------------------------------
 ## Commands specific to lesson websites.
 
@@ -86,7 +88,7 @@ HTML_DST = \
   ${DST}/license/index.html
 
 ## lesson-md        : convert Rmarkdown files to markdown
-lesson-md : ${RMD_DST}
+lesson-md : preprocess-md ${RMD_DST}
 
 # Use of .NOTPARALLEL makes rule execute only once
 ${RMD_DST} : ${RMD_SRC}
