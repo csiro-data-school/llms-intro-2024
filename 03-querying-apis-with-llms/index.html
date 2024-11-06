@@ -1,0 +1,376 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta http-equiv="last-modified" content="2024-11-06 07:46:56 +0000">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- meta "search-domain" used for google site search function google_search() -->
+    <meta name="search-domain" value="https://github.com/pages/csiro-data-school/llms-intro-2024">
+    <link rel="stylesheet" type="text/css" href="../assets/css/bootstrap.css" />
+    <link rel="stylesheet" type="text/css" href="../assets/css/bootstrap-theme.css" />
+    <link rel="stylesheet" type="text/css" href="../assets/css/lesson.css" />
+    <link rel="stylesheet" type="text/css" href="../assets/css/syntax.css" />
+    <script type="module" src="https://cdn.jsdelivr.net/npm/mermaid@10/dist/mermaid.esm.min.mjs"></script>
+
+
+    
+
+
+
+    <!-- Favicons for everyone -->
+    <link rel="apple-touch-icon-precomposed" sizes="57x57" href="https://csiro-data-school.github.io/llms-intro-2024/assets/favicons/swc/apple-touch-icon-57x57.png" />
+    <link rel="apple-touch-icon-precomposed" sizes="114x114" href="https://csiro-data-school.github.io/llms-intro-2024/assets/favicons/swc/apple-touch-icon-114x114.png" />
+    <link rel="apple-touch-icon-precomposed" sizes="72x72" href="https://csiro-data-school.github.io/llms-intro-2024/assets/favicons/swc/apple-touch-icon-72x72.png" />
+    <link rel="apple-touch-icon-precomposed" sizes="144x144" href="https://csiro-data-school.github.io/llms-intro-2024/assets/favicons/swc/apple-touch-icon-144x144.png" />
+    <link rel="apple-touch-icon-precomposed" sizes="60x60" href="https://csiro-data-school.github.io/llms-intro-2024/assets/favicons/swc/apple-touch-icon-60x60.png" />
+    <link rel="apple-touch-icon-precomposed" sizes="120x120" href="https://csiro-data-school.github.io/llms-intro-2024/assets/favicons/swc/apple-touch-icon-120x120.png" />
+    <link rel="apple-touch-icon-precomposed" sizes="76x76" href="https://csiro-data-school.github.io/llms-intro-2024/assets/favicons/swc/apple-touch-icon-76x76.png" />
+    <link rel="apple-touch-icon-precomposed" sizes="152x152" href="https://csiro-data-school.github.io/llms-intro-2024/assets/favicons/swc/apple-touch-icon-152x152.png" />
+    <link rel="icon" type="image/png" href="https://csiro-data-school.github.io/llms-intro-2024/assets/favicons/swc/favicon-196x196.png" sizes="196x196" />
+    <link rel="icon" type="image/png" href="https://csiro-data-school.github.io/llms-intro-2024/assets/favicons/swc/favicon-96x96.png" sizes="96x96" />
+    <link rel="icon" type="image/png" href="https://csiro-data-school.github.io/llms-intro-2024/assets/favicons/swc/favicon-32x32.png" sizes="32x32" />
+    <link rel="icon" type="image/png" href="https://csiro-data-school.github.io/llms-intro-2024/assets/favicons/swc/favicon-16x16.png" sizes="16x16" />
+    <link rel="icon" type="image/png" href="https://csiro-data-school.github.io/llms-intro-2024/assets/favicons/swc/favicon-128.png" sizes="128x128" />
+    <meta name="application-name" content="Software Carpentry - LLMs and Generative AI for Science"/>
+    <meta name="msapplication-TileColor" content="#FFFFFF" />
+    <meta name="msapplication-TileImage" content="https://csiro-data-school.github.io/llms-intro-2024/assets/favicons/swc/mstile-144x144.png" />
+    <meta name="msapplication-square70x70logo" content="https://csiro-data-school.github.io/llms-intro-2024/assets/favicons/swc/mstile-70x70.png" />
+    <meta name="msapplication-square150x150logo" content="https://csiro-data-school.github.io/llms-intro-2024/assets/favicons/swc/mstile-150x150.png" />
+    <meta name="msapplication-wide310x150logo" content="https://csiro-data-school.github.io/llms-intro-2024/assets/favicons/swc/mstile-310x150.png" />
+    <meta name="msapplication-square310x310logo" content="https://csiro-data-school.github.io/llms-intro-2024/assets/favicons/swc/mstile-310x310.png" />
+
+
+    <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+	<script src="https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script>
+	<script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
+	<![endif]-->
+    <title>LLMs and Generative AI for Science: Querying APIs with LLMs</title>
+  </head>
+  <body>
+    <div class="container">
+      
+<nav class="navbar navbar-default">
+  <div class="container-fluid">
+    <div class="navbar-header">
+      <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+        <span class="sr-only">Toggle navigation</span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+
+      
+      
+      <a href="https://software-carpentry.org" class="pull-left">
+        <img class="navbar-logo" src="../assets/img/swc-icon-blue.svg" alt="Software Carpentry logo" />
+      </a>
+      
+
+      
+      <a class="navbar-brand" href="../">Home</a>
+
+    </div>
+    <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+      <ul class="nav navbar-nav">
+
+	
+        <li><a href="../CODE_OF_CONDUCT.html">Code of Conduct</a></li>
+
+        
+	
+        <li><a href="../setup.html">Setup</a></li>
+
+        
+        <li class="dropdown">
+          <a href="../" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Episodes <span class="caret"></span></a>
+          <ul class="dropdown-menu">
+            
+            <li><a href="../01-introducing-llms/index.html">What are LLMs and Generative AI</a></li>
+            
+            <li><a href="../02-responsible-use/index.html">Responsible Use of Generative AI</a></li>
+            
+            <li><a href="../03-querying-apis-with-llms/index.html">Querying APIs with LLMs</a></li>
+            
+            <li><a href="../04-integrating-llms/index.html">Integrating LLMs in scientific workflows</a></li>
+            
+	    <li role="separator" class="divider"></li>
+            <li><a href="../aio.html">All in one page (Beta)</a></li>
+          </ul>
+        </li>
+	
+
+	
+	
+        <li class="dropdown">
+          <a href="../" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Extras <span class="caret"></span></a>
+          <ul class="dropdown-menu">
+            <li><a href="../reference.html">Reference</a></li>
+            
+            <li><a href="../about/index.html">About</a></li>
+            
+            <li><a href="../discuss/index.html">Discussion</a></li>
+            
+            <li><a href="../figures/index.html">Figures</a></li>
+            
+            <li><a href="../guide/index.html">Instructor Notes</a></li>
+            
+          </ul>
+        </li>
+	
+
+	
+        <li><a href="../LICENSE.html">License</a></li>
+	
+	<li><a href="https://github.com/csiro-data-school/llms-intro-2024/edit/gh-pages/_episodes/03-querying-apis-with-llms.md">Improve this page <span class="glyphicon glyphicon-pencil" aria-hidden="true"></span></a></li>
+	
+      </ul>
+      <form class="navbar-form navbar-right" role="search" id="search" onsubmit="google_search(); return false;">
+        <div class="form-group">
+          <input type="text" id="google-search" placeholder="Search..." aria-label="Google site search">
+        </div>
+      </form>
+    </div>
+  </div>
+</nav>
+
+
+<div class="row">
+  <div class="col-xs-1">
+    <h3 class="text-left">
+      
+      <a href="../02-responsible-use/index.html"><span class="glyphicon glyphicon-menu-left" aria-hidden="true"></span><span class="sr-only">previous episode</span></a>
+      
+    </h3>
+  </div>
+  <div class="col-xs-10">
+    
+    <h3 class="maintitle"><a href="../">LLMs and Generative AI for Science</a></h3>
+    
+  </div>
+  <div class="col-xs-1">
+    <h3 class="text-right">
+      
+      <a href="../04-integrating-llms/index.html"><span class="glyphicon glyphicon-menu-right" aria-hidden="true"></span><span class="sr-only">next episode</span></a>
+      
+    </h3>
+  </div>
+</div>
+
+<article>
+<div class="row">
+  <div class="col-md-1">
+  </div>
+  <div class="col-md-10">
+    <h1 class="maintitle">Querying APIs with LLMs</h1>
+  </div>
+  <div class="col-md-1">
+  </div>
+</div>
+
+
+<blockquote class="objectives">
+  <h2>Overview</h2>
+
+  <div class="row">
+    <div class="col-md-3">
+      <strong>Teaching:</strong> 30 min
+      <br/>
+      <strong>Exercises:</strong> 40 min
+    </div>
+    <div class="col-md-9">
+      <strong>Questions</strong>
+      <ul>
+	
+	<li><p>How can LLMs be used to work with APIs</p>
+</li>
+	
+	<li><p>What approaches are useful in prompting LLMs to help?</p>
+</li>
+	
+      </ul>
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="col-md-3">
+    </div>
+    <div class="col-md-9">
+      <strong>Objectives</strong>
+      <ul>
+	
+	<li><p>Understand how APIs can be invoked using LLMs</p>
+</li>
+	
+	<li><p>Develop skills in quickly analysing and applying documentation with LLMs</p>
+</li>
+	
+      </ul>
+    </div>
+  </div>
+
+</blockquote>
+
+<h2 id="llms-for-working-with-apis">LLMs for working with APIs</h2>
+
+<p>In science we often want to query application programming interfaces or APIs to get data, and sometimes to analyze it. In this context APIs are typically web services. Often when calling a web service API there are a range of concerns you need to take into account. Many services require Authentication, which is proves to the service that your are authorized to use it. APIs are often accessed through one or more URL paths, sometimes parts of the path are used to carry information you want to send to the API. URL parameters, things after a url path normally beginning with a ‘?’, are also used to provide information to the API.</p>
+
+<p>Most APIs are documented and this is very useful for building specific calls to the API.</p>
+
+<p>Different APIs typically expect different parameters and, while there are often patterns or commonalities between APIs, typically there you’ll need to refer to documentation to use an API effectively.</p>
+
+<h3 id="reading-and-adapting-documentation-with-llms">Reading and adapting documentation with LLMs</h3>
+
+<p>LLMs are very useful in working with APIs. This is because an LLM can read API documentation for you and summarize it picking out relevant information. Furthermore LLMs can be prompted to read API documentation and, from that, build a specific query matching your natural language request. At best this means that you don’t need to understand an API in much detail to use it. This can save a lot of time and cognitive effort.</p>
+
+<h3 id="example-querying-earthquake-data-from-the-usgs-web-service">Example: Querying earthquake data from the USGS web service</h3>
+
+<p>The website https://github.com/public-apis/public-apis?tab=readme-ov-file#science–math has a great list of APIs we can use to learn how to work with APIs and LLMs</p>
+
+<p>One of those listed is https://earthquake.usgs.gov/fdsnws/event/1/  an usgs API for earthquake information. Lets say we want to get a list of earth quakes larger than 5 on the richter scale in Australia.</p>
+
+<h4 id="including-documentation-in-llm-prompts">Including documentation in LLM prompts</h4>
+<p>The documentation looks complex. Having been trained on large portion of the internet LLMs like GPT4 may well have information on this API. However as the API documentation is reasonably short we can use it directly <em>as part of our prompt</em>. This is a very important technique when prompting LLMs. Often it is useful to paste in large amounts of context information in addition to your specific question.</p>
+
+<p>In this case we can paste as the first part of our prompt the entirety of the documentation page https://earthquake.usgs.gov/fdsnws/event/1/.  Then we can follow up by asking the LLM what to tell us more about the API. In this conversation, the LLM gives very specific details initially and then is further prompted to give more general information, https://chatgpt.com/share/603c97b5-698b-4ef3-b5ae-8b77936d441b.</p>
+
+<h4 id="using-the-llm-to-build-an-api-call">Using the LLM to build an API call</h4>
+
+<p>We can try a very specific question “Build a query to find, what earthquakes larger than magnitude 5 on the richter scale have occured in Victoria in the past 50 years?”. To ask we paste in the documentation again in a fresh conversation and include this question at the end.</p>
+
+<p>ChatGPT4 gives an promising result https://chatgpt.com/share/98526278-939a-4c9e-a60c-de44f20041c1. It suggests “https://earthquake.usgs.gov/fdsnws/event/1/query?format=geojson&amp;starttime=1974-05-26&amp;endtime=2024-05-26&amp;minmagnitude=5&amp;minlatitude=-39.2&amp;maxlatitude=-33.9&amp;minlongitude=140.9&amp;maxlongitude=150” and also provides an explaination of each aspect of the query.</p>
+
+<h4 id="understanding-the-query">Understanding the query</h4>
+
+<p>As we can see from the resulting query it’s likely to have encapsulated many aspects of the question correctly, the date times look around the right values, and a quick check on a map indeed shows that geographic ranges are likely correct for a bounding box of victoria.</p>
+
+<h4 id="using-the-query">Using the Query</h4>
+
+<p>Pasting that query into a web browser gives a short json document as a response. It’s not very readable. Querying the LLM again it suggests that geojson.io might be a suitable website for visualising this data.</p>
+
+<p><img src="../fig/map.png" alt="" />{alt=’map of earthquakes in australia’}</p>
+
+<h4 id="exploring-the-data">Exploring the data</h4>
+
+<p>Exploring the data a bit we can see 3 candidate earthquakes and clicking on the provides some data. Each is timestamped but it is unclear what the format is. Let’s paste a record into ChatGPT and see what it can decipher.</p>
+
+<h5 id="fixing-the-time">Fixing the time</h5>
+
+<p>The conversation, https://chatgpt.com/share/f0decf2e-8b80-4ea2-af76-5b18489ab338 tells us that the time is in ‘seconds since epoch’ and following up provides a direct conversion. ChatGPT includes a capability to perform calculations. This is not a native LLM capability, rather ChatGPT integrates a python enivornment, the LLM generates code and the python enviornment executes it and the LLM interprets the results. We could have manually perform this workflow with the LLM by asking it to generate code to convert epoch time to human readdable time and executed this in a python enviornment ourselves.</p>
+
+<h4 id="testing-the-outputs">Testing the outputs</h4>
+
+<p>One very important aspect of using LLMs is ensuring that they give us the correct results. This example is ideal because the LLM has provided us with a very small number of results. Likely these events would’ve been news worthy. We can check the LLM hasn’t given us any false positives by searching for news reports corresponds to the records. Doing this with one record gives us <a href="https://en.wikipedia.org/wiki/2021_Mansfield_earthquake#:~:text=An%20earthquake%20struck%20approximately%2053,on%20the%20moment%20magnitude%20scale">Mansfield Earthquake</a>. At least one of the responses from the API queried using ChatGPT has been verified.</p>
+
+<p>In this case it would be more difficult to determine that the LLM hadn’t missed any events. Nevertheless we have much higher confidence that the query is correct because we can see that it has returned at least one correct answer fullfilling at least some of our criteria. As the query is simple further confidence can be gained by careful consideration of the query parameters and a review of the USGS documentation. LLMs can also be employed to help suggest testing strategies and review.</p>
+
+<blockquote class="challenge">
+  <h2 id="try-a-different-query">Try a different query</h2>
+
+  <p>Using the USGS API endpoint and the techniques described execute a new query and verify it.</p>
+
+</blockquote>
+
+<blockquote class="challenge">
+  <h2 id="try-another-api">Try another API</h2>
+
+  <p>Try  another api listed at https://github.com/public-apis/public-apis?tab=readme-ov-file#science–math</p>
+
+</blockquote>
+
+<hr />
+
+<h3 id="note">Note</h3>
+<p>GPT-4 was used to fix minor mistakes</p>
+
+
+<blockquote class="keypoints">
+  <h2>Key Points</h2>
+  <ul>
+    
+    <li><p>LLMs can be very direct path to building API queries</p>
+</li>
+    
+    <li><p>Testing and understanding are essential</p>
+</li>
+    
+  </ul>
+</blockquote>
+
+</article>
+
+<div class="row">
+  <div class="col-xs-1">
+    <h3 class="text-left">
+      
+      <a href="../02-responsible-use/index.html"><span class="glyphicon glyphicon-menu-left" aria-hidden="true"></span><span class="sr-only">previous episode</span></a>
+      
+    </h3>
+  </div>
+  <div class="col-xs-10">
+    
+  </div>
+  <div class="col-xs-1">
+    <h3 class="text-right">
+      
+      <a href="../04-integrating-llms/index.html"><span class="glyphicon glyphicon-menu-right" aria-hidden="true"></span><span class="sr-only">next episode</span></a>
+      
+    </h3>
+  </div>
+</div>
+
+
+      
+      
+<footer>
+  <div class="row">
+    <div class="col-md-6 copyright" align="left">
+	
+	Copyright &copy; 2018–2024
+	<a href="https://carpentries.org/">The Carpentries</a>
+        <br>
+        Copyright &copy; 2016–2018
+	<a href="https://software-carpentry.org">Software Carpentry Foundation</a>
+	
+    </div>
+    <div class="col-md-6 help-links" align="right">
+	
+	<a href="https://github.com/csiro-data-school/llms-intro-2024/edit/gh-pages/_episodes/03-querying-apis-with-llms.md">Edit on GitHub</a>
+	
+	/
+	<a href="https://github.com/csiro-data-school/llms-intro-2024/blob/gh-pages/CONTRIBUTING.md">Contributing</a>
+	/
+	<a href="https://github.com/csiro-data-school/llms-intro-2024/">Source</a>
+	/
+	<a href="https://github.com/csiro-data-school/llms-intro-2024/blob/gh-pages/CITATION">Cite</a>
+	/
+	<a href="mailto:team@carpentries.org">Contact</a>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-md-12" align="center">
+      Using <a href="https://github.com/carpentries/styles/">The Carpentries style</a>
+      version <a href="https://github.com/carpentries/styles/releases/tag/v9.5.2">9.5.2</a>.
+    </div>
+  </div>
+</footer>
+
+      
+    </div>
+    
+<script src="../assets/js/jquery.min.js"></script>
+<script src="../assets/js/bootstrap.min.js"></script>
+<script src="../assets/js/lesson.js"></script>
+<script>
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+  ga('create', 'UA-37305346-2', 'auto');
+  ga('send', 'pageview');
+</script>
+
+  </body>
+</html>
