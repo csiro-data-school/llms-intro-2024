@@ -24,9 +24,9 @@ kind: "lesson"
 # Magic to make URLs resolve both locally and on GitHub.
 # See https://help.github.com/articles/repository-metadata-on-github-pages/.
 # Please don't change it: <USERNAME>/<PROJECT> is correct.
-#repository: <USERNAME>/<PROJECT>
-repository: csiro-data-school/llms-intro-2024  # Replace with your actual repo
-url: "https://csiro-data-school.github.io/llms-intro-2024"  # Replace with your GitHub Pages URL
+repository: <USERNAME>/<PROJECT>
+#repository: csiro-data-school/llms-intro-2024  # Replace with your actual repo
+#url: "https://csiro-data-school.github.io/llms-intro-2024"  # Replace with your GitHub Pages URL
 
 # Email address, no mailto:
 email: "team@carpentries.org"
