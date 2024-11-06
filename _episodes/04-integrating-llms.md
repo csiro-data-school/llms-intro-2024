@@ -18,7 +18,7 @@ keypoints:
 Scientific workflows here means the process in a science project of transforming inputs into value added delivered outputs. This process might be partly automated. A typical project might consist of understanding the problem, researching existing literature, developing new ideas and methods, analysing existing data, performing experiments, assuring quality and delivering science.
 
 LLM are very general purpose and can help at many stages. Because LLM are new it's often the case that we may not immediately think to apply a LLM 
-
+Need to fix diagram
 ```mermaid
 graph LR
     %% Main Workflow
