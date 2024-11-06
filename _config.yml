@@ -1,9 +1,7 @@
 #------------------------------------------------------------
 # Values for this lesson.
 #------------------------------------------------------------
-exclude:
-  - vendor
-  - Gemfile.lock
+
 
 # Which carpentry is this ("swc", "dc", "lc", or "cp")?
 # swc: Software Carpentry
@@ -93,6 +91,8 @@ exclude:
   - Makefile
   - bin/
   - .Rproj.user/
+  - vendor
+  - Gemfile.lock
 
 # Turn on built-in syntax highlighting.
 highlighter: rouge
