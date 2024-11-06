@@ -16,7 +16,7 @@ keypoints:
 
 LLMs are Large Language Models, a type of trained ML model. The most famous LLM is ChatGPT. A simple way to consider LLMs is as an AI conversational partner.
 
-LLMs interpret and generate text; they are very good at generating appropriate responses to input text. As a result, they are highly capable of answering questions, creative writing, human-like small talk, and text analysis.
+LLMs interpret and  generate text; they are very good at generating appropriate responses to input text. As a result, they are highly capable of answering questions, creative writing, human-like small talk, and text analysis.
 
 Furthermore, because they have been trained on vast amounts of existing text, they are capable of many tasks beyond what we considered traditional human-like capabilities.
 
