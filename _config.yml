@@ -28,6 +28,11 @@ repository: <USERNAME>/<PROJECT>
 # Email address, no mailto:
 email: "team@carpentries.org"
 
+markdown: kramdown
+gems:
+  - jekyll-mermaid
+
+
 # Sites.
 amy_site: "https://amy.software-carpentry.org/workshops"
 carpentries_github: "https://github.com/carpentries"
